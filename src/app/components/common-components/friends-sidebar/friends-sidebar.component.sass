@@ -1,0 +1,38 @@
+@import './../../../mixins'
+.polite-section
+    +initflex($direction: column, $justification: center, $itemAlign: center, $bgcolor: rgb(234, 234, 234), $width: 30vw, $height: 100%)
+    margin-top: 0
+    h1
+        font-family: Arial, Helvetica, sans-serif
+    hr
+        width: 70%
+        height: 0.01em
+    .polite-input-row
+        +initflex($direction: row, $justification: none, $itemAlign: none, $bgcolor: white, $width: 90%, $height: 2em)
+        border-radius: 0.5em
+        img
+            +widthandheight($width: 2em, $height: 2em)
+        .polite-input
+            +fontAndBorder($borderWidth: 0, $borderRadius: 0.5em, $fontFamily: arial, $fontWeight: bold)
+            +widthandheight($width: 90%, $height: 2em)
+            border-image: none
+        .polite-input::-webkit-input-placeholder
+                text-align: center
+        .polite-input:focus, input:focus
+            outline: none
+    .polite-row
+        +initflex($direction: row, $justification: space-evenly, $itemAlign: center, $bgcolor: none, $width: 100%, $height: 2em)
+        img
+            +widthandheight($width: 2em, $height: 2em)
+    .polite-row:hover
+        cursor: pointer
+        background-color: #fff
+    .polite-row__actions
+        +initflex($direction: row, $justification: flex-end, $itemAlign: center, $bgcolor: none, $width: 100%, $height: 6em)
+        .polite-row__actions-create
+            +initflex($direction: column, $justification: center, $itemAlign: center, $bgcolor: none, $width: 20%, $height: 100%)
+            img
+                +widthandheight($width: 3em, $height: 3em)
+        .polite-row__actions-create:hover
+            cursor: pointer
+            background-color: #fff

@@ -1,0 +1,55 @@
+=initflex($direction, $justification, $itemAlign, $bgcolor, $width, $height)
+    display: flex
+    flex-direction: $direction
+    justify-content: $justification
+    align-items: $itemAlign
+    background-color: $bgcolor
+    width: $width
+    height: $height
+
+=initflex-NoHeight($direction, $justification, $itemAlign, $bgcolor, $width)
+    display: flex
+    flex-direction: $direction
+    justify-content: $justification
+    align-items: $itemAlign
+    background-color: $bgcolor
+    width: $width
+
+=initflex-NoColor($direction, $justification, $itemAlign, $width, $height)
+    display: flex
+    flex-direction: $direction
+    justify-content: $justification
+    align-items: $itemAlign
+    background-color: inherit
+    width: $width
+    height: $height
+
+=initfixed($position, $bottom, $top, $right, $left)
+    position: $position
+    bottom: $bottom
+    top: $top
+    right: $right
+    left: $left
+
+=adjustfont($color, $fontsize, $shadowWidth, $shadowHeight, $shadowColor)
+    color: $color
+    font-size: $fontsize
+    text-shadow: $shadowWidth $shadowHeight $shadowColor
+
+=widthandheight($width, $height)
+    width: $width
+    height: $height
+
+=reset-MarginBlock()
+    margin-block-start: 0
+    margin-block-end: 0
+
+=hoverBasic($opacity)
+    opacity: $opacity
+    cursor: pointer
+
+=fontAndBorder($borderWidth, $borderRadius, $fontFamily, $fontWeight)
+    border-width: $borderWidth
+    border-radius: $borderRadius
+    font-family: $fontFamily
+    font-weight: $fontWeight
