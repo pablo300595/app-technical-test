@@ -8,15 +8,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { FriendsSidebarComponent } from './components/common-components/friends-sidebar/friends-sidebar.component';
-import { HomeDetailComponent } from './components/home/home-detail/home-detail.component';
-import { HomeEditComponent } from './components/common-components/home-edit/home-edit.component';
+import { HomeCreateComponent } from './components/home/home-create/home-create.component';
+import { HomeEditComponent } from './components/home/home-edit/home-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     FriendsSidebarComponent,
-    HomeDetailComponent,
+    HomeCreateComponent,
     HomeEditComponent
   ],
   imports: [

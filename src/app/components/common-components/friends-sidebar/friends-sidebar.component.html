@@ -5,10 +5,12 @@
         <input class="polite-input" type="text" placeholder="Search">
     </div>
     <hr>
-    <div class="polite-row" (click)="goToEditView()">
-        <p>Mrs. User Name 1</p>
-        <img src="./../../../../assets/favorite_off_icon.svg" alt="search_icon">
+   <div class="polite-row" *ngFor="let contact of contactList" (click)="goToEditView(contact)" [routerLink]="['/edit']">
+        <p>{{contact.first_name }}</p>
+        <img src="./../../../../assets/favorite_off_icon.svg" alt="search_icon" *ngIf="!contact.favorite">
+        <img src="./../../../../assets/favorite_on_icon.svg" alt="search_icon" *ngIf="contact.favorite">
     </div>
+     <!--
     <hr>
     <div class="polite-row" (click)="goToEditView()">
         <p>Mrs. User Name 1</p>
@@ -53,9 +55,9 @@
     <div class="polite-row" (click)="goToEditView()">
         <p>Mrs. User Name 1</p>
         <img src="./../../../../assets/favorite_off_icon.svg" alt="search_icon">
-    </div>
+    </div>-->
 
-    <div class="polite-row__actions" [routerLink]="['/']">
+    <div class="polite-row__actions" [routerLink]="['/home']">
         <div class="polite-row__actions-create" (click)="goToCreateView()">
             <img src="./../../../../assets/add_icon.svg" alt="add_icon">
         </div>

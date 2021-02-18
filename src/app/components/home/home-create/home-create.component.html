@@ -1,8 +1,6 @@
 <form [formGroup]="politeSectionForm" class="polite-section">
     <div class="polite-row">
-        <h1 *ngIf="action=='create'">Create</h1>
-        <h1 *ngIf="action=='edit'">Edit</h1>
-        <button *ngIf="action=='edit'">Delete</button>
+        <h1>Create</h1>
         <div class="polite-row__button" (click)="changeFavoriteStatus()">
             <img src="./../../../../assets/favorite_on_icon.svg" alt="search_icon" *ngIf="isFavorite">
             <img src="./../../../../assets/favorite_off_icon.svg" alt="search_icon" *ngIf="!isFavorite">
@@ -51,8 +49,6 @@
         </div>
     </div>
     <div class="polite-row-actions">
-        <button *ngIf="action=='create'" (click)="saveContact()">Create</button>
-        <button *ngIf="action=='edit'">Cancel</button>
-        <button *ngIf="action=='edit'">Update</button>
+        <button (click)="saveContact()">Create</button>
     </div>
 </form>

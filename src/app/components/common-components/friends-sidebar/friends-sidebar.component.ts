@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeDetailService } from './../../home/home-detail/services/home-detail.service';
+import { HomeCreateService } from './../../home/home-create/services/home-create.service';
+import { ContactService } from './../../common-services/contact/contact.service';
+import { FriendsSidebarService } from './services/friends-sidebar.service';
 
 @Component({
   selector: 'app-friends-sidebar',
@@ -8,18 +10,22 @@ import { HomeDetailService } from './../../home/home-detail/services/home-detail
 })
 export class FriendsSidebarComponent implements OnInit {
   action: string
-  constructor(private homeDetailService: HomeDetailService) { }
+  contactList: any
+  constructor(private contactService: ContactService, private friendsSidebarService: FriendsSidebarService) { }
 
   ngOnInit(): void {
-    this.homeDetailService.actionObs.subscribe(res => this.action = res)
+    this.contactService.getContacts().subscribe(res => {
+      this.contactList = res
+      console.log(this.contactList)
+    })
   }
 
   goToCreateView() {
-    this.homeDetailService.changeActionBS('create')
+    
   }
 
-  goToEditView() {
-    this.homeDetailService.changeActionBS('edit')
+  goToEditView(contact) {
+    this.friendsSidebarService.changeUserToEditBS(contact)
   }
 
 }

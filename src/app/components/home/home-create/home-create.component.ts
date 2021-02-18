@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
-import { HomeDetailService } from './services/home-detail.service';
-import { ContactService } from './../../common-services/contact/contact.service';
+import { HomeCreateService } from './services/home-create.service';
+import { ContactService } from '../../common-services/contact/contact.service';
 
 @Component({
-  selector: 'app-home-detail',
-  templateUrl: './home-detail.component.html',
-  styleUrls: ['./home-detail.component.sass']
+  selector: 'app-home-create',
+  templateUrl: './home-create.component.html',
+  styleUrls: ['./home-create.component.sass']
 })
-export class HomeDetailComponent implements OnInit {
+export class HomeCreateComponent implements OnInit {
   phoneNumberList = [{type: 'mobile', value: ''}]
-  action: string
   isFavorite: boolean
   politeSectionForm = new FormGroup({
     firstName: new FormControl(''),
@@ -19,19 +18,13 @@ export class HomeDetailComponent implements OnInit {
     martial: new FormControl('unmarried'),
     favorite: new FormControl(false)
   })
-  constructor(private fb: FormBuilder, private homeDetailService: HomeDetailService,
+
+  constructor(private fb: FormBuilder, private homeCreateService: HomeCreateService,
     private contactService: ContactService) { }
 
   ngOnInit(): void {
     this.addFormControl(0)
     this.isFavorite = false
-    this.homeDetailService.actionObs.subscribe(res => {
-      if(res !== null) this.action = res
-      else {
-        this.action = 'create'
-        this.homeDetailService.changeActionBS('create')
-      }
-    })
   }
 
   addPhoneNumber(phoneNumber: any) {
@@ -65,8 +58,6 @@ export class HomeDetailComponent implements OnInit {
       favorite: this.isFavorite,
       contact: this.getPhoneArray()
     }
-    console.log(this.action)
-    console.log(contact)
     this.contactService.createContact(contact).subscribe(res => {
       console.log(res)
     }, err => {
@@ -86,11 +77,11 @@ export class HomeDetailComponent implements OnInit {
       return (control[0].includes('phoneType'))
      })
 
-    const secondFilteredPhoneList = firstFilteredPhoneList.map((item) => {
+    const secondFilteredPhoneList = firstFilteredPhoneList.map((item: any) => {
       return item[1].value
     })
 
-    const secondFilteredPhoneTypeList = firstFilteredPhonetypeList.map((item) => {
+    const secondFilteredPhoneTypeList = firstFilteredPhonetypeList.map((item: any) => {
       return item[1].value
     })
 
