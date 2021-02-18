@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
+import { HomeDetailService } from './services/home-detail.service';
+import { ContactService } from './../../common-services/contact/contact.service';
 
 @Component({
   selector: 'app-home-detail',
@@ -17,18 +19,19 @@ export class HomeDetailComponent implements OnInit {
     martial: new FormControl('unmarried'),
     favorite: new FormControl(false)
   })
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private homeDetailService: HomeDetailService,
+    private contactService: ContactService) { }
 
   ngOnInit(): void {
     this.addFormControl(0)
     this.isFavorite = false
-    if(localStorage.getItem('action') !== null) {
-      this.action = localStorage.getItem('action')
-    } else {
-      this.action = 'create'
-      localStorage.setItem('action', this.action)
-    }
-    
+    this.homeDetailService.actionObs.subscribe(res => {
+      if(res !== null) this.action = res
+      else {
+        this.action = 'create'
+        this.homeDetailService.changeActionBS('create')
+      }
+    })
   }
 
   addPhoneNumber(phoneNumber: any) {
@@ -53,8 +56,8 @@ export class HomeDetailComponent implements OnInit {
     console.log(this.politeSectionForm)
   }
 
-  saveUser() {
-    let user = {
+  saveContact() {
+    let contact = {
       first_name: this.politeSectionForm.controls['firstName'].value,
       last_name: this.politeSectionForm.controls['lastName'].value,
       gender: this.politeSectionForm.controls['gender'].value,
@@ -62,8 +65,13 @@ export class HomeDetailComponent implements OnInit {
       favorite: this.isFavorite,
       contact: this.getPhoneArray()
     }
-
-    console.log(user)
+    console.log(this.action)
+    console.log(contact)
+    this.contactService.createContact(contact).subscribe(res => {
+      console.log(res)
+    }, err => {
+      console.log(err)
+    })
   }
 
   getPhoneArray() {
@@ -87,7 +95,7 @@ export class HomeDetailComponent implements OnInit {
     })
 
     for (let i = 0; i < secondFilteredPhoneList.length; i++) {
-      currentObjectPhoneList.push({type: secondFilteredPhoneTypeList[i], no: secondFilteredPhoneList[i]})
+      currentObjectPhoneList.push({_type: secondFilteredPhoneTypeList[i], no: secondFilteredPhoneList[i]})
     }
 
     return (currentObjectPhoneList)

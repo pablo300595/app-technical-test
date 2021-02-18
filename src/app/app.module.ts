@@ -2,8 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { FriendsSidebarComponent } from './components/common-components/friends-sidebar/friends-sidebar.component';
 import { HomeDetailComponent } from './components/home/home-detail/home-detail.component';
@@ -20,7 +22,8 @@ import { HomeEditComponent } from './components/common-components/home-edit/home
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
