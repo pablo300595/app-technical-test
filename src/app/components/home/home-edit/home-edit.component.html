@@ -1,6 +1,7 @@
 <form [formGroup]="politeSectionForm" class="polite-section">
     <div class="polite-row">
         <h1>Edit</h1>
+        <button mat-raised-button color="accent" (click)="deleteContact()">Delete</button>
         <div class="polite-row__button" (click)="changeFavoriteStatus()">
             <img src="./../../../../assets/favorite_on_icon.svg" alt="search_icon" *ngIf="isFavorite">
             <img src="./../../../../assets/favorite_off_icon.svg" alt="search_icon" *ngIf="!isFavorite">
@@ -49,8 +50,8 @@
         </div>
     </div>
     <div class="polite-row-actions">
-        <button (click)="updateContact()">Update</button>
-        <button>Cancel</button>
+        <button mat-raised-button color="primary" (click)="updateContact()">Update</button>
+        <button mat-raised-button color="white" [routerLink]="['/home']">Cancel</button>
     </div>
 </form>
 

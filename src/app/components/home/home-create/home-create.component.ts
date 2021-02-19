@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { HomeCreateService } from './services/home-create.service';
+import { FriendsSidebarService } from './../../common-components/friends-sidebar/services/friends-sidebar.service';
 import { ContactService } from '../../common-services/contact/contact.service';
+import { NotificationService } from './../../common-services/notifications/notification.service';
 
 @Component({
   selector: 'app-home-create',
@@ -20,7 +22,8 @@ export class HomeCreateComponent implements OnInit {
   })
 
   constructor(private fb: FormBuilder, private homeCreateService: HomeCreateService,
-    private contactService: ContactService) { }
+    private contactService: ContactService, private friendsSidebarService: FriendsSidebarService,
+    private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.addFormControl(0)
@@ -60,8 +63,12 @@ export class HomeCreateComponent implements OnInit {
     }
     this.contactService.createContact(contact).subscribe(res => {
       console.log(res)
+      this.contactService.getContacts().subscribe(contacts => {
+        this.friendsSidebarService.changeCurrentContactList(contacts)
+        this.notificationService.success('Concact has been successfully created!')
+      })
     }, err => {
-      console.log(err)
+      this.notificationService.warn('An error ocurred with the data!!')
     })
   }
 

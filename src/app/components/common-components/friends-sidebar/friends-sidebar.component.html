@@ -5,7 +5,8 @@
         <input class="polite-input" type="text" placeholder="Search">
     </div>
     <hr>
-   <div class="polite-row" *ngFor="let contact of contactList" (click)="goToEditView(contact)" [routerLink]="['/edit']">
+
+   <div class="polite-row" *ngFor="let contact of currentContactList" (click)="goToEditView(contact)">
         <p>{{contact.first_name }}</p>
         <img src="./../../../../assets/favorite_off_icon.svg" alt="search_icon" *ngIf="!contact.favorite">
         <img src="./../../../../assets/favorite_on_icon.svg" alt="search_icon" *ngIf="contact.favorite">

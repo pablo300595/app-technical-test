@@ -19,4 +19,13 @@ export class ContactService {
   getContacts() {
     return this.http.get(this.url)
   }
+
+  updateContactById(id, data) {
+    return this.http.put(`${this.url}/${id}`, data)
+  }
+
+  deleteContactById(id) {
+    return this.http.delete(`${this.url}/${id}`)
+  }
+
 }

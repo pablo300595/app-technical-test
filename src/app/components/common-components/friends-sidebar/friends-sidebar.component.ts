@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
+import { Router } from '@angular/router';
 import { HomeCreateService } from './../../home/home-create/services/home-create.service';
 import { ContactService } from './../../common-services/contact/contact.service';
 import { FriendsSidebarService } from './services/friends-sidebar.service';
@@ -9,14 +10,24 @@ import { FriendsSidebarService } from './services/friends-sidebar.service';
   styleUrls: ['./friends-sidebar.component.sass']
 })
 export class FriendsSidebarComponent implements OnInit {
-  action: string
+  currentContactList: any
   contactList: any
-  constructor(private contactService: ContactService, private friendsSidebarService: FriendsSidebarService) { }
+  userToEdit: any
+  constructor(private contactService: ContactService, private friendsSidebarService: FriendsSidebarService,
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.contactService.getContacts().subscribe(res => {
-      this.contactList = res
-      console.log(this.contactList)
+    this.friendsSidebarService.userToEditObs.subscribe(res => {
+      this.userToEdit = res
+    })
+
+    this.friendsSidebarService.currentContactListObs.subscribe(res => {
+      this.currentContactList = res
+    })
+
+    this.contactService.getContacts().subscribe(contacts => {
+      this.contactList = contacts
+      this.currentContactList = this.contactList
     })
   }
 
@@ -26,6 +37,18 @@ export class FriendsSidebarComponent implements OnInit {
 
   goToEditView(contact) {
     this.friendsSidebarService.changeUserToEditBS(contact)
+    const route = this.router.url
+    //if(route == '/' || route == 'home') {
+    if(route == '/edit') {
+      this.router.navigateByUrl('/')
+      setTimeout(() => {
+        this.router.navigateByUrl('/edit')
+      }, 0)
+    } else {
+      this.router.navigateByUrl('/edit')
+    }
+    
+    //}
   }
 
 }
